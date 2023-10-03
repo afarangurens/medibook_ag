@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+      - name: api-gateway-app
+        image: us-central1-docker.pkg.dev/billetera-digital-388512/swarch-2023-repo/swarch2023i_ag_2:v01
+        ports:
+        - containerPort: 5000
