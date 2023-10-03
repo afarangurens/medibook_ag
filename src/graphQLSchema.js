@@ -22,9 +22,16 @@ import {
 	RecordTypeMutations
 } from './swarch2023i/records/typeDefs';
 
+import {
+	SiteTypeDef,
+	SiteQueries,
+	SiteMutations
+} from './swarch2023i/sites/typeDefs'
+
 import categoryResolvers from './swarch2023i/categories/resolvers';
 import authResolvers from './swarch2023i/auth/resolvers';
 import recordResolvers from './swarch2023i/records/resolvers';
+import siteResolvers from './swarch2023i/sites/resolvers'
 
 // merge the typeDefs
 const mergedTypeDefs = mergeSchemas(
@@ -32,17 +39,20 @@ const mergedTypeDefs = mergeSchemas(
 		'scalar JSON',
 		scheduledPaymentTypeDef,
 		authTypeDef,
-		RecordTypeDef
+		RecordTypeDef,
+		SiteTypeDef
 	],
 	[
 		scheduledPaymentQueries,
 		authenticationQueries,
-		RecordTypeQueries
+		RecordTypeQueries,
+		SiteQueries
 	],
 	[
 		scheduledPaymentMutations,
 		authenticationMutations,
-		RecordTypeMutations
+		RecordTypeMutations,
+		SiteMutations
 	]
 );
 
@@ -53,6 +63,7 @@ export default makeExecutableSchema({
 		{ JSON: GraphQLJSON }, // allows scalar JSON
 		categoryResolvers,
 		authResolvers,
-		recordResolvers
+		recordResolvers,
+		siteResolvers
 	)
 });
