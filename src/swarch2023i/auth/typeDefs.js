@@ -1,30 +1,49 @@
 export const authTypeDef = `
     type User {
-        _id: ID!
-        username: String!
+        email: String!
         password: String!
     }
-    input UserInput {
-        _id: ID!
-        username: String!
-        password: String!
-    }
-    type Session {
-        userId: String!
-        username: String!
-        token: String!
-    }`;
 
-export const authenticationQueries = `
-    userById(id: ID!): User!
-    validateToken(token: String!): Boolean!
+    type Status {
+        code: Int!
+        message: String!
+    }
+
+    input UserInput {
+        email: String!
+        password: String!
+    }
+
+    type CreateUserResponse {
+        status: Status!
+    }
+
+    type UserLogin {
+        id: Int!
+        email: String!
+    }
+    type Data {
+        user: UserLogin!
+        token: String!
+    }
+
+    type LoginStatus {
+        code: Int!
+        message: String!
+        data: Data!
+    }
+
+    type AuthResponse {
+        status: LoginStatus!
+    }
+    
 `;
 
-export const authenticationMutations = `
-    createUser(user: UserInput!): User!
-    deleteUser(id: ID!): User!
-    updateUser(id: ID!, user: UserInput!): User!
+export const authQueries = `
+    getUser(email: String!): User
+  `;
 
-    signIn(username: String!, password: String!): Session!
-    signOut(token: String!): Session!
+export const authMutations = `
+    createUser(user: UserInput!): CreateUserResponse
+    loginUser(user: UserInput!): AuthResponse
 `;

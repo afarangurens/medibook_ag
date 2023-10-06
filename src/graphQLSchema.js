@@ -12,8 +12,8 @@ import {
 
 import {
 	authTypeDef,
-	authenticationQueries,
-	authenticationMutations
+	authQueries,
+	authMutations
 } from './swarch2023i/auth/typeDefs';
 
 import {
@@ -44,7 +44,7 @@ const mergedTypeDefs = mergeSchemas(
 	],
 	[
 		scheduledPaymentQueries,
-		authenticationQueries,
+		authQueries,
 		RecordTypeQueries,
 		SiteQueries
 	],
@@ -52,7 +52,7 @@ const mergedTypeDefs = mergeSchemas(
 		scheduledPaymentMutations,
 		authenticationMutations,
 		RecordTypeMutations,
-		SiteMutations
+		authMutations
 	]
 );
 

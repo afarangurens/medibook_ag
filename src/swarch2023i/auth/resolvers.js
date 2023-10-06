@@ -1,27 +1,16 @@
-import { generalRequest, getRequest } from '../../utilities';
+import { generalRequest } from '../../utilities';
 import { url, port, entryPoint } from './server';
 
-const URL = `http://${url}:${port}`;
+const URL = `https://${url}:${port}`;
 
 const resolvers = {
-    Query: {
-        userById: (_, {id} ) =>
-            generalRequest(`${URL}/${_id}`, 'GET')
-    },
-    Mutation: {
-        signIn: async (_, {username, password} ) => {
-            console.log(`${URL}/login`);
-            let user = await generalRequest(
-                `${URL}/login`,
-                'POST',
-                { username, password }
-            );
-            //if (user.statusCode !== 200) 
-            return user;
-
-
-        }
-    }
+  Query: {},
+  Mutation: {
+    createUser: (_, { user }) =>
+      generalRequest(`${URL}/signup`, 'POST', { user }),
+    loginUser: (_, { user }) =>
+      generalRequest(`${URL}/login`, 'POST', { user }),
+  }
 };
 
-export default resolvers
+export default resolvers;
